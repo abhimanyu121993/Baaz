@@ -10,4 +10,14 @@ class UserVehicleMap extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    public function vehicleUsers()
+    {
+        return $this->belongsTo(User::class, 'userid');
+    }
+
+    public function vehicleModel()
+    {
+        return $this->belongsTo(CompanyModel::class, 'modelid');
+    }
 }

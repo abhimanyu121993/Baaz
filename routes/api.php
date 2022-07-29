@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,12 +29,13 @@ Route::post('update-profile/{id}', [UserController::class, 'updateProfile']);
 
 
 //Home Routes
-Route::get('fetch-company', [HomeController::class, 'company']);
-Route::get('fetch-company-model', [HomeController::class, 'companyModel']);
+Route::post('fetch-company', [HomeController::class, 'company']);
+Route::post('fetch-company-model', [HomeController::class, 'companyModel']);
 Route::get('fetch-slider', [HomeController::class, 'slider']);
 Route::get('fetch-offer-banner', [HomeController::class, 'offerBanner']);
-Route::get('fetch-fuel-type', [HomeController::class, 'fuelType']);
+Route::post('fetch-fuel-type', [HomeController::class, 'fuelType']);
 Route::get('fetch-category', [HomeController::class, 'category']);
 Route::get('fetch-services', [HomeController::class, 'services']);
 
-Route::post('user-vehicle-map', [HomeController::class, 'userVehicleMap']);
+Route::post('user-vehicle-map', [UserController::class, 'userVehicleMap']);
+Route::post('fetch-vehicles', [UserController::class, 'userVehicles']);

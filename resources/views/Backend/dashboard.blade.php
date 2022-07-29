@@ -1,4 +1,4 @@
-@extends('Layouts.Backend.adminLayout')
+@extends('Layouts.adminLayout')
 @section('Content-Area')
 
 <div class="row match-height">

@@ -14,9 +14,10 @@ class AuthController extends Controller
     {
         $req->validate([
             'mobileno' => 'required|min:10|max:10',
-            'authentication' => 'required|boolean'
+            'authentication' => 'required'
         ]);
-        if ($req->authentication === TRUE) {
+        if ($req->authentication === 'TRUE')
+        {
             $phone = User::find($req->mobileno);
             try
             {

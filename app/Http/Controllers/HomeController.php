@@ -10,9 +10,9 @@ use App\Models\FuelType;
 use App\Models\OfferBanner;
 use App\Models\Service;
 use App\Models\Slider;
-use App\Models\UserVehicleMap;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 
 class HomeController extends Controller
@@ -54,9 +54,12 @@ class HomeController extends Controller
 
     public function companyModel(Request $req)
     {
+        $req->validate([
+            'company_id' => 'required'
+        ]);
         try
         {
-            $model = CompanyModel::where('cid', $req->cid)->get();
+            $model = Company::find($req->company_id)->models;
             if ($model)
             {
                 $result = [
@@ -262,52 +265,5 @@ class HomeController extends Controller
         }
     }
 
-    public function userVehicleMap(Request $req)
-    {
-        $req->validate([
-            'userid' => 'required',
-            'modelid' => 'required',
-            'fueltype' => 'required'
-        ]);
-
-        try
-        {
-            $batchno = $req->userid.time().rand(1,99);
-            $data = [
-                'userid' => $req->userid,
-                'modelid' => $req->modelid,
-                'fueltype' => $req->fueltype,
-                'batchno' => $batchno
-            ];
-            $uservehiclemap = UserVehicleMap::create($data) ;
-            if ($uservehiclemap)
-            {
-                $result = [
-                    'data' => $uservehiclemap,
-                    'message' => 'Login successfully',
-                    'status' => 200,
-                    'error' => NULL
-                ];
-            }
-            else
-            {
-                $result = [
-                    'data' => NULL,
-                    'message' => 'Login Unsuccessful',
-                    'status' => 200,
-                    'error' => [
-                        'message' => 'Server Error',
-                        'code' => 305,
-                    ]
-                ];
-            }
-            return response()->json($result);
-        }
-        catch (Exception $ex)
-        {
-            $url=URL::current();
-            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
-        }
-    }
 
 }
