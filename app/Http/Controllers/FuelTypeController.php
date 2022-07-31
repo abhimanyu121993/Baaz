@@ -159,9 +159,7 @@ class FuelTypeController extends Controller
      */
     public function destroy($id)
     {
-        Log::info('destry'.$id);
         $id=Crypt::decrypt($id);
-        Log::info('destry'.$id);
         try{
                 $res=FuelType::find($id)->delete();
                 if($res)
