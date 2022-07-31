@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ModelController;
-use App\Http\Controllers\BrandModelMapController;
+use App\Http\Controllers\FuelTypeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,5 +18,5 @@ Route::group(['prefix'=>'Backend','as'=>'Backend.'],function(){
 
     Route::resource('brand',BrandController::class);
     Route::resource('model',ModelController::class);
-    Route::resource('brandmodel',BrandModelMapController::class);
+    Route::resource('fueltype',FuelTypeController::class);
 });
