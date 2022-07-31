@@ -26,30 +26,31 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <label class="form-label" for="basic-addon-name">Brand Name</label>
-
-                        <select class="form-control">
-                            <option ></option>
+                        <label class="form-label" for="desc">Brand Name</label>
+                        <select class="select2 form-select" id="select2-basic"  name='bname' required>
+                        {{-- @if(isset($subcategory))
+                              <option value='{{$subcategory->category_id}}'>{{$subcategory->category->name}}</option>
+                        @else --}}
+                        <option selected disabled value="">--Select Category--</option>
+                        @endif
+                       
+                            @foreach ($brands as $brand)
+                                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                            @endforeach
                         </select>
-                        
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">.</div>
                     </div>
                     <div class="col-md-6 mb-1">
-                        <label class="form-label" for="pic">Image Thumbnail</label>
-                        <input type="file" name='pic' id="pic" class="form-control " aria-label="pic"
-                            aria-describedby="pic" />
+                        <label class="form-label" for="pic">Model Name</label>
+                        <input type="text" name='mname' class="form-control " />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-2">
                         <button type="submit"
-                            class="btn btn-primary waves-effect waves-float waves-light">{{ isset($modeledit) ? 'Edit' : 'Add' }}</button>
+                            class="btn btn-primary waves-effect waves-float waves-light">{{ isset($brandmodeledit) ? 'Edit' : 'Add' }}</button>
                     </div>
-                    @if (isset($modeledit))
-                        <div class="col-sm-6">
-                            <img src="{{ asset('upload/models') }}/{{ $modeledit->image }}" class="bg-light-info"
-                                alt="" style="height:100px;width:200px;">
-                        </div>
-                    @endif
                 </div>
 
             </form>

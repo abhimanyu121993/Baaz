@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('brand_models', function (Blueprint $table) {
             $table->id();
+            $table->string('bid');
             $table->string('name');
             $table->string('image')->nullable();
             $table->softDeletes();

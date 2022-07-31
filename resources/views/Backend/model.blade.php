@@ -3,6 +3,7 @@
 @section('Head-Area')
     <link rel="stylesheet" type="text/css" href="{{ asset('BackEnd/assets/css/plugins/forms/form-validation.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('BackEnd/assets/css/plugins/forms/pickers/form-flat-pickr.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/vendors/css/forms/select/select2.min.css')}}">
 @endsection
 
 @section('Content-Area')
@@ -26,12 +27,27 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <label class="form-label" for="basic-addon-name">Brand Name</label>
-
-                        <input type="text" id="basic-addon-name" name='mname' class="form-control"
-                            value="{{ isset($modeledit) ? $modeledit->name : '' }}" placeholder="brand Name"
-                            aria-label="Name" aria-describedby="basic-addon-name" required />
+                        <label class="form-label" for="desc">Brand Name</label>
+                        <select class="select2 form-select" id="select2-basic"  name='bid' required>
+                        @if(isset($modeledit))
+                              <option value='{{$modeledit->id}}'>{{$modeledit->brand->name}}</option>
+                        @else
+                        <option selected disabled value="">--Select Category--</option>
+                        @endif
+                       
+                            @foreach ($brands as $brand)
+                                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                            @endforeach
+                        </select>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">.</div>
                     </div>
+                    <div class="col-md-6 mb-1">
+                        <label class="form-label" for="pic">Model Name</label>
+                        <input type="text" name='mname' class="form-control " value="{{ isset($modeledit) ? $modeledit->name : '' }}" />
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6 mb-1">
                         <label class="form-label" for="pic">Image Thumbnail</label>
                         <input type="file" name='pic' id="pic" class="form-control " aria-label="pic"
@@ -63,7 +79,8 @@
                 <thead>
                     <tr>
                         <th>Sr.No</th>
-                        <th>Name</th>
+                        <th>Brand Name</th>
+                        <th>Model Name</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
@@ -74,6 +91,7 @@
                     @foreach ($models as $md)
                         <tr>
                             <td>{{ $i++ }}</td>
+                            <td>{{ $md->brand->name }}</td>
                             <td>{{ $md->name }}</td>
                             <td><img src="{{ asset('upload/models/' . $md->image) }}" class="me-75 bg-light-danger"
                                     style="height:60px;width:150px;" /></td>
@@ -120,4 +138,6 @@
     <script src="{{ asset('Backend/assets/vendors/js/tables/datatable/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('Backend/assets/vendors/js/tables/datatable/responsive.bootstrap5.js') }}"></script>
     <script src="{{ asset('Backend/assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="{{asset('BackEnd/assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+<script src="{{asset('BackEnd/assets/js/scripts/forms/form-select2.js')}}"></script>
 @endsection

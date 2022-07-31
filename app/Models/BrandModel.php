@@ -11,4 +11,8 @@ class BrandModel extends Model
     use HasFactory, SoftDeletes;
     protected $guarded = [];
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'bid');
+    }
 }
