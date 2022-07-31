@@ -29,6 +29,19 @@
         </div>
         <div class="card-body statistics-body">
           <div class="row">
+            <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
+                <div class="d-flex flex-row">
+                  <div class="avatar bg-light-danger me-2">
+                    <div class="avatar-content">
+                      <i data-feather="box" class="avatar-icon"></i>
+                    </div>
+                  </div>
+                  <div class="my-auto">
+                    <h4 class="fw-bolder mb-0">1.423k</h4>
+                    <p class="card-text font-small-3 mb-0">Users</p>
+                  </div>
+                </div>
+              </div>
             <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
               <div class="d-flex flex-row">
                 <div class="avatar bg-light-primary me-2">
@@ -37,8 +50,8 @@
                   </div>
                 </div>
                 <div class="my-auto">
-                  <h4 class="fw-bolder mb-0">230k</h4>
-                  <p class="card-text font-small-3 mb-0">Sales</p>
+                  <h4 class="fw-bolder mb-0">2k</h4>
+                  <p class="card-text font-small-3 mb-0">Brands</p>
                 </div>
               </div>
             </div>
@@ -50,24 +63,12 @@
                   </div>
                 </div>
                 <div class="my-auto">
-                  <h4 class="fw-bolder mb-0">8.549k</h4>
-                  <p class="card-text font-small-3 mb-0">Customers</p>
+                  <h4 class="fw-bolder mb-0">8k</h4>
+                  <p class="card-text font-small-3 mb-0">Models</p>
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
-              <div class="d-flex flex-row">
-                <div class="avatar bg-light-danger me-2">
-                  <div class="avatar-content">
-                    <i data-feather="box" class="avatar-icon"></i>
-                  </div>
-                </div>
-                <div class="my-auto">
-                  <h4 class="fw-bolder mb-0">1.423k</h4>
-                  <p class="card-text font-small-3 mb-0">Products</p>
-                </div>
-              </div>
-            </div>
+
             <div class="col-xl-3 col-sm-6 col-12">
               <div class="d-flex flex-row">
                 <div class="avatar bg-light-success me-2">

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Brand;
-use App\Models\Error;
+use App\Models\BrandModelMap;
+use App\Models\Error as ModelsError;
+use Error;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
-class BrandController extends Controller
+class BrandModelMapController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +21,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::get();
-        return view('Backend.brand', compact('brands'));
+        $brandmodels = BrandModelMap::get();
+        return view('Backend.brandmodel', compact('brandmodels'));
     }
 
     /**
@@ -43,33 +43,28 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info('store model'.json_encode($request->all()));
         $request->validate([
-            'bname'=>'required',
+            'mname'=>'required',
             'pic'=>'nullable|image'
         ]);
-        $brandpic='branddummy.jpg';
         try
         {
-            if($request->hasFile('pic'))
-            {
-                $brandpic='brand-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/brands/'),$brandpic);
-            }
-            $res= Brand::create(['name'=>$request->bname,'image'=>$brandpic]);
+            $res= BrandModelMap::create(['name'=>$request->mname,'image'=>$modelpic]);
 
             if($res)
             {
-                session()->flash('success','Brand Added Sucessfully');
+                session()->flash('success','Model Added Sucessfully');
             }
             else
             {
-                session()->flash('error','Brand not added ');
+                session()->flash('error','Model not added ');
             }
         }
         catch(Exception $ex)
         {
             $url=URL::current();
-            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+            ModelsError::create(['url'=>$url,'message'=>$ex->getMessage()]);
             Session::flash('error','Server Error ');
         }
             return redirect()->back();
@@ -94,12 +89,12 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brands = Brand::get();
+        $models = BrandModelMap::get();
         $id=Crypt::decrypt($id);
-        $brandedit=Brand::find($id);
-        if($brandedit)
+        $modeledit=BrandModelMap::find($id);
+        if($modeledit)
         {
-            return view('Backend.brand',compact('brands','brandedit'));
+            return view('Backend.brandmodel',compact('models','modeledit'));
         }
         else
         {
@@ -118,7 +113,7 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'bname'=>'required',
+            'mname'=>'required',
             'pic'=>'nullable|image'
         ]);
         $brandpic='branddummy.jpg';
@@ -126,13 +121,12 @@ class BrandController extends Controller
         {
             if($request->hasFile('pic'))
             {
-                $brandpic='brand-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/brands/'),$brandpic);
-                $oldpic=Brand::find($id)->pluck('image')[0];
-                    unlink(public_path('upload/brands/'.$oldpic));
-                    Brand::find($id)->update(['image'=>$brandpic]);
+                $modelpic='brand-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/models/'),$modelpic);
+                $oldpic=BrandModelMap::find($id)->pluck('image')[0];
+                    unlink(public_path('upload/models/'.$oldpic));
             }
-            $res= Brand::find($id)->update(['name'=>$request->bname,'image'=>$brandpic]);
+            $res= BrandModelMap::find($id)->update(['name'=>$request->mname,'image'=>$modelpic]);
 
             if($res)
             {
@@ -162,7 +156,7 @@ class BrandController extends Controller
     {
         $id=Crypt::decrypt($id);
         try{
-                $res=Brand::find($id)->delete();
+                $res=BrandModelMap::find($id)->delete();
                 if($res)
                 {
                     session()->flash('success','Brand deleted ducessfully');

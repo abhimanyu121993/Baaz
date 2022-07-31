@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CompanyModel extends Model
+class Brand extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
 
-    public function brand()
+    public function models()
     {
-        return $this->belongsTo(Brand::class, 'cid');
+        return $this->hasMany(CompanyModel::class, 'cid');
     }
 }

@@ -10,17 +10,17 @@
         <div class="card-header">
             <h3>
                 @if (!isset($brandedit))
-                    Add New Brand
+                    Brand Model Map
                 @else
-                    Edit Brand
+                    Edit Brand Model Map
                 @endif
             </h3>
         </div>
         <div class="card-body">
             <form class="needs-validation"
-                action="{{ isset($brandedit) ? route('Backend.brand.update', $brandedit->id) : route('Backend.brand.store') }}"
+                action="{{ isset($brandmodeledit) ? route('Backend.brandmodel.update', $brandmodeledit->id) : route('Backend.brandmodel.store') }}"
                 method='post' enctype="multipart/form-data">
-                @if (isset($brandedit))
+                @if (isset($brandmodeledit))
                     @method('patch')
                 @endif
                 @csrf
@@ -28,9 +28,10 @@
                     <div class="col-md-6 mb-1">
                         <label class="form-label" for="basic-addon-name">Brand Name</label>
 
-                        <input type="text" id="basic-addon-name" name='bname' class="form-control"
-                            value="{{ isset($brandedit) ? $brandedit->name : '' }}" placeholder="brand Name"
-                            aria-label="Name" aria-describedby="basic-addon-name" required />
+                        <select class="form-control">
+                            <option ></option>
+                        </select>
+                        
                     </div>
                     <div class="col-md-6 mb-1">
                         <label class="form-label" for="pic">Image Thumbnail</label>
@@ -41,11 +42,12 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <button type="submit"
-                            class="btn btn-primary waves-effect waves-float waves-light">{{ isset($brandedit) ? 'Edit' : 'Add' }}</button>
+                            class="btn btn-primary waves-effect waves-float waves-light">{{ isset($modeledit) ? 'Edit' : 'Add' }}</button>
                     </div>
-                    @if (isset($brandedit))
+                    @if (isset($modeledit))
                         <div class="col-sm-6">
-                            <img src="{{ asset('upload/brands') }}/{{ $brandedit->image }}" class="bg-light-info" alt="" style="height:100px;width:200px;">
+                            <img src="{{ asset('upload/models') }}/{{ $modeledit->image }}" class="bg-light-info"
+                                alt="" style="height:100px;width:200px;">
                         </div>
                     @endif
                 </div>
@@ -56,28 +58,28 @@
 
     <div class="card">
         <div class="card-header">
-            <h3>Manage Brands</h3>
+            <h3>Brand Model Map</h3>
         </div>
         <div class="card-body">
             <table class="datatables-basic table datatable table-responsive">
                 <thead>
                     <tr>
                         <th>Sr.No</th>
-                        <th>Name</th>
-                        <th>Image</th>
+                        <th>Brand Name</th>
+                        <th>Brand Model</th>
                         <th>Action</th>
                     </tr>
 
                 </thead>
                 <tbody>
-                    @php $i=1;@endphp
-                    @foreach ($brands as $bd)
-                        <tr>
-                            <td>{{ $i++ }}</td>
-                            <td>{{ $bd->name }}</td>
-                            <td><img src="{{ asset('upload/brands/' . $bd->image) }}" class="me-75 bg-light-danger"
-                                    style="height:60px;width:150px;" /></td>
-                            <td>
+                    @if ($brandmodels)
+                        @php $i=1;@endphp
+                        @foreach ($brandmodels as $bm)
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $bm->name }}</td>
+                                <td>{{ $bm->name }}</td>
+
                                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                                     <div class="mb-1 breadcrumb-right">
                                         <div class="dropdown">
@@ -85,27 +87,29 @@
                                                 type="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false"><i data-feather="grid"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                @php $bid=Crypt::encrypt($bd->id); @endphp
-                                                <a class="dropdown-item" href="{{ route('Backend.brand.edit', $bid) }}"><i
-                                                        class="me-1" data-feather="check-square"></i><span
+                                                @php $bmid=Crypt::encrypt($bm->id); @endphp
+                                                <a class="dropdown-item"
+                                                    href="{{ route('Backend.brandmodel.edit', $bmid) }}"><i class="me-1"
+                                                        data-feather="check-square"></i><span
                                                         class="align-middle">Edit</span></a>
-                                                        <a class="dropdown-item" href=""
-                                                        onclick="event.preventDefault();document.getElementById('delete-form-{{ $bid }}').submit();"><i
-                                                            class="me-1" data-feather="message-square"></i><span
-                                                            class="align-middle">Delete</span></a>
+                                                <a class="dropdown-item" href=""
+                                                    onclick="event.preventDefault();document.getElementById('delete-form-{{ $bmid }}').submit();"><i
+                                                        class="me-1" data-feather="message-square"></i><span
+                                                        class="align-middle">Delete</span></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <form id="delete-form-{{ $bid }}" action="{{ route('Backend.brand.destroy', $bid) }}"
-                            method="post" style="display: none;">
-                            @method('DELETE')
-                            @csrf
-                        </form>
-                    @endforeach
-
+                                </td>
+                            </tr>
+                            <form id="delete-form-{{ $bmid }}"
+                                action="{{ route('Backend.brandmodel.destroy', $bmid) }}" method="post"
+                                style="display: none;">
+                                @method('DELETE')
+                                @csrf
+                            </form>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

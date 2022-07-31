@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_models', function (Blueprint $table) {
+        Schema::create('admin_auths', function (Blueprint $table) {
             $table->id();
-            $table->string('cid');
-            $table->string('name');
-            $table->string('image')->nullable();
-            $table->softDeletes();
+            $table->string('email');
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_models');
+        Schema::dropIfExists('admin_auths');
     }
 };
