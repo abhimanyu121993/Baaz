@@ -13,6 +13,6 @@ class Brand extends Model
 
     public function models()
     {
-        return $this->hasMany(CompanyModel::class, 'cid');
+        return $this->hasMany(BrandModel::class, 'bid');
     }
 }

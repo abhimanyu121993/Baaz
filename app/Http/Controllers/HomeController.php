@@ -59,14 +59,13 @@ class HomeController extends Controller
         ]);
         try
         {
-            Log::info('brandmodel'.json_encode($req->all()));
             $model = BrandModel::find($req->company_id)->models;
-            Log::info('brandmodeldata'.json_encode($model));
+            Log::info('model'.json_encode($model));
             if ($model)
             {
                 $result = [
                     'data' => $model,
-                    'message' => 'Company model details found',
+                    'message' => 'Brand model details found',
                     'status' => 200,
                     'error' => NULL
                 ];
@@ -75,7 +74,7 @@ class HomeController extends Controller
             {
                 $result = [
                     'data' => NULL,
-                    'message' => 'Company details not found',
+                    'message' => 'Brand details not found',
                     'status' => 200,
                     'error' => [
                         'message' => 'Server Error',
