@@ -160,11 +160,14 @@ class HomeController extends Controller
         }
     }
 
-    public function services()
+    public function services(Request $req)
     {
+        $req->validate([
+            'category_id' => 'required'
+        ]);
         try
         {
-            $services = Service::get();
+            $services = Category::find($req->category_id)->services;
             if ($services)
             {
                 $result = [
