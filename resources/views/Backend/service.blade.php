@@ -65,7 +65,7 @@
                     </div>
                     @if (isset($serviceedit))
                         <div class="col-sm-6">
-                            <img src="{{ asset($modeledit->image) }}" class="bg-light-info" alt="" style="height:100px;width:200px;">
+                            <img src="{{ asset($serviceedit->image) }}" class="bg-light-info" alt="" style="height:100px;width:200px;">
                         </div>
                     @endif
                 </div>
