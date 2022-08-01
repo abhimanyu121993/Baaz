@@ -59,8 +59,7 @@ class HomeController extends Controller
         ]);
         try
         {
-            $model = BrandModel::find($req->company_id)->models;
-            Log::info('model'.json_encode($model));
+            $model = Brand::find($req->company_id)->models;
             if ($model)
             {
                 $result = [
