@@ -51,5 +51,6 @@ class AdminController extends Controller
     public function optimize()
     {
         Artisan::call('optimize');
+
     }
 }
