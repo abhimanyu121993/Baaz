@@ -45,7 +45,7 @@
                     </div>
                     @if (isset($fueltypeedit))
                         <div class="col-sm-6">
-                            <img src="{{ asset('upload/fueltype') }}/{{ $fueltypeedit->image }}" class="bg-light-info" alt="" style="height:100px;width:100px;">
+                            <img src="{{ asset($fueltypeedit->image) }}" class="bg-light-info" alt="" style="height:100px;width:100px;">
                         </div>
                     @endif
                 </div>
@@ -75,7 +75,7 @@
                         <tr>
                             <td>{{ $i++ }}</td>
                             <td>{{ $ft->name }}</td>
-                            <td><img src="{{ asset('upload/fueltype/' . $ft->image) }}" class="me-75 bg-light-danger"
+                            <td><img src="{{ asset( $ft->image) }}" class="me-75 bg-light-danger"
                                     style="height:60px;width:100px;" /></td>
                             <td>
                                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
