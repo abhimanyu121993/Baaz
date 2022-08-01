@@ -19,6 +19,7 @@ class UserController extends Controller
         ]);
         try
         {
+
             $user = User::find($req->user_id);
             if ($user)
             {
