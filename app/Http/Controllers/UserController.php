@@ -56,7 +56,7 @@ class UserController extends Controller
         $req->validate([
             'user_id' => 'required',
             'name' => 'required|string|min:3|max:255',
-            'mobile' => 'required|min:10|max:10',
+            'mobileno' => 'required|min:10|max:10',
             'email' => 'required|email|max:255',
         ]);
         try
