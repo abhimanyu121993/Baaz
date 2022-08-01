@@ -24,8 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('user-login', [AuthController::class, 'userLogin']);
 
 //User Routes
-Route::post('user-profile/{id}', [UserController::class, 'userProfile']);
-Route::post('update-profile/{id}', [UserController::class, 'updateProfile']);
+Route::post('user-profile', [UserController::class, 'userProfile']);
+Route::post('update-profile', [UserController::class, 'updateProfile']);
 
 
 //Home Routes

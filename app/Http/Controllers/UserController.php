@@ -14,9 +14,12 @@ class UserController extends Controller
 {
     public function userProfile(Request $req)
     {
+        $req->validate([
+            'user_id' => 'required'
+        ]);
         try
         {
-            $user = User::where('id', $req->id);
+            $user = User::find($req->user_id);
             if ($user)
             {
                 $result = [
