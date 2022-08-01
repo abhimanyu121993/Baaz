@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\BrandModel;
 use App\Models\Category;
-use App\Models\Company;
-use App\Models\CompanyModel;
 use App\Models\Error;
 use App\Models\FuelType;
 use App\Models\OfferBanner;

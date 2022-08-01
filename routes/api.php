@@ -30,7 +30,7 @@ Route::post('update-profile/{id}', [UserController::class, 'updateProfile']);
 
 //Home Routes
 Route::post('fetch-brand', [HomeController::class, 'brand']);
-Route::post('fetch-brand-model', [HomeController::class, 'companyModel']);
+Route::post('fetch-brand-model', [HomeController::class, 'brandModel']);
 Route::post('fetch-slider', [HomeController::class, 'slider']);
 Route::post('fetch-offer-banner', [HomeController::class, 'offerBanner']);
 Route::post('fetch-fuel-type', [HomeController::class, 'fuelType']);
