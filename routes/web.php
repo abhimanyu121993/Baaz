@@ -16,7 +16,7 @@ Route::post('adminlogin',[AdminController::class,'login'])->name('login');
 
 Route::group(['prefix'=>'Backend','as'=>'Backend.'],function(){
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('logout',[AdminController::class,'logout'])->name('logout');
+    Route::post('logout',[AdminController::class,'logout'])->name('logout');
 
     Route::resource('brand',BrandController::class);
     Route::resource('model',ModelController::class);
