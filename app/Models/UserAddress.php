@@ -13,6 +13,6 @@ class UserAddress extends Model
 
     public function usersAddress()
     {
-        return $this->belongsTo(UserAddress::class, 'uid');
+        return $this->belongsTo(User::class, 'uid');
     }
 }

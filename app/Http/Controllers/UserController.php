@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Error;
 use App\Models\User;
+use App\Models\UserAddress;
 use App\Models\UserVehicleMap;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,14 +13,13 @@ use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
-    public function userProfile(Request $req)
+    public function showProfile(Request $req)
     {
         $req->validate([
             'user_id' => 'required'
         ]);
         try
         {
-
             $user = User::find($req->user_id);
             if ($user)
             {
@@ -167,6 +167,96 @@ class UserController extends Controller
                 $result = [
                     'data' => NULL,
                     'message' => 'User vehicles not found',
+                    'status' => 200,
+                    'error' => [
+                        'message' => 'Server Error',
+                        'code' => 305,
+                    ]
+                ];
+            }
+            return response()->json($result);
+        }
+        catch (Exception $ex)
+        {
+            $url=URL::current();
+            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+        }
+    }
+
+    public function fetchUserAddress(Request $req)
+    {
+        $req->validate([
+            'user_id' => 'required'
+        ]);
+        try
+        {
+            $user = User::find($req->user_id)->usersAddress;
+            if ($user)
+            {
+                $result = [
+                    'data' => $user,
+                    'message' => 'User address found',
+                    'status' => 200,
+                    'error' => NULL
+                ];
+            }
+            else
+            {
+                $result = [
+                    'data' => NULL,
+                    'message' => 'User address not found',
+                    'status' => 200,
+                    'error' => [
+                        'message' => 'Server Error',
+                        'code' => 305,
+                    ]
+                ];
+            }
+            return response()->json($result);
+        }
+        catch (Exception $ex)
+        {
+            $url=URL::current();
+            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+        }
+    }
+
+    public function updateUserAddress(Request $req)
+    {
+        $req->validate([
+            'user_id' => 'required',
+            'address' => 'nullable',
+            'city' => 'nullable',
+            'state' => 'nullable',
+            'country' => 'nullable',
+            'pincode' => 'nullable',
+            'status' => 'nullable'
+        ]);
+        try
+        {
+            $data = [
+                'address' => $req->address,
+                'city' => $req->city,
+                'state' => $req->state,
+                'country' => $req->country,
+                'pincode' => $req->pincode,
+                'status' => $req->status
+            ];
+            $user = User::find($req->user_id)->update($data);
+            if ($user)
+            {
+                $result = [
+                    'data' => $user,
+                    'message' => 'User address updated successfully',
+                    'status' => 200,
+                    'error' => NULL
+                ];
+            }
+            else
+            {
+                $result = [
+                    'data' => NULL,
+                    'message' => 'User address not updated',
                     'status' => 200,
                     'error' => [
                         'message' => 'Server Error',

@@ -24,18 +24,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('user-login', [AuthController::class, 'userLogin']);
 
 //User Routes
-Route::post('user-profile', [UserController::class, 'userProfile']);
+Route::post('show-profile', [UserController::class, 'showProfile']);
 Route::post('update-profile', [UserController::class, 'updateProfile']);
 
 
 //Home Routes
 Route::post('fetch-brand', [HomeController::class, 'brand']);
 Route::post('fetch-brand-model', [HomeController::class, 'brandModel']);
-Route::post('fetch-slider', [HomeController::class, 'slider']);
-Route::post('fetch-offer-banner', [HomeController::class, 'offerBanner']);
 Route::post('fetch-fuel-type', [HomeController::class, 'fuelType']);
 Route::post('fetch-category', [HomeController::class, 'category']);
 Route::post('fetch-services', [HomeController::class, 'services']);
-
 Route::post('user-vehicle-map', [UserController::class, 'userVehicleMap']);
 Route::post('fetch-vehicles', [UserController::class, 'userVehicles']);
+Route::post('fetch-user-address', [UserController::class, 'fetchUserAddress']);
+Route::post('update-user-address', [UserController::class, 'updateUserAddress']);
+
+Route::post('fetch-slider', [HomeController::class, 'slider']);
+Route::post('fetch-offer-banner', [HomeController::class, 'offerBanner']);

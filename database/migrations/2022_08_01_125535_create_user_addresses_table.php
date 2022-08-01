@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('pincode')->nullable();
             $table->string('country')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status')->default('1');
             $table->timestamps();
         });
     }
