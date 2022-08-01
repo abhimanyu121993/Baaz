@@ -18,7 +18,6 @@ class AdminController extends Controller
 
     public function login(Request $req)
     {
-        Log::info('login'.json_encode($req->all()));
         if(Auth::guard('adminauth')
             ->attempt(['email' => $req->email, 'password' => $req->password], $req->remember_me))
         {
