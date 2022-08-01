@@ -48,4 +48,9 @@ class User extends Authenticatable
         return $this->hasMany(UserVehicleMap::class, 'userid');
     }
 
+    public function userHasAddress()
+    {
+        return $this->hasMany(UserAddress::class, 'uid');
+    }
+
 }

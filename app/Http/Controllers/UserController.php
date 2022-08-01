@@ -54,6 +54,7 @@ class UserController extends Controller
     public function updateProfile(Request $req)
     {
         $req->validate([
+            'user_id' => 'required',
             'name' => 'required|string|min:3|max:255',
             'mobile' => 'required|min:10|max:10',
             'email' => 'required|email|max:255',
@@ -65,7 +66,7 @@ class UserController extends Controller
                 'mobileno' => $req->mobileno,
                 'email' => $req->email
             ];
-            $user = User::where('id', $req->id)->update($data);
+            $user = User::find($req->user_id)->update($data);
             if ($user)
             {
                 $result = [

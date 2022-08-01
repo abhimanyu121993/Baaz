@@ -6,18 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserVehicleMap extends Model
+class UserAddress extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
 
-    public function vehicleUsers()
+    public function usersAddress()
     {
-        return $this->belongsTo(User::class, 'userid');
-    }
-
-    public function vehicleModel()
-    {
-        return $this->belongsTo(BrandModel::class, 'bid');
+        return $this->belongsTo(UserAddress::class, 'uid');
     }
 }
