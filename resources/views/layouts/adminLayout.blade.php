@@ -5,6 +5,7 @@
   <head>
     @include('Backend.includes.head')
 
+
     @yield('Head-Area')
 
   </head>
