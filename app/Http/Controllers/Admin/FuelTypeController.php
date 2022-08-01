@@ -52,7 +52,7 @@ class FuelTypeController extends Controller
         {
             if($request->hasFile('pic'))
             {
-                $brandpic='brand-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $fuelpic='fueltype-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
                 $request->pic->move(public_path('upload/fueltype/'),$fuelpic);
             }
             $res= FuelType::create(['name'=>$request->name,'image'=>'upload/fueltype/'.$fuelpic]);
@@ -118,7 +118,7 @@ class FuelTypeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'bname'=>'required',
+            'name'=>'required',
             'pic'=>'nullable|image'
         ]);
         $brandpic='branddummy.jpg';
@@ -126,21 +126,21 @@ class FuelTypeController extends Controller
         {
             if($request->hasFile('pic'))
             {
-                $fuelpic='brand-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/brands/'),$fuelpic);
+                $fuelpic='fueltype-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/fueltype/'),$fuelpic);
                 $oldpic=FuelType::find($id)->pluck('image')[0];
                     unlink(public_path($oldpic));
                     FuelType::find($id)->update(['image'=>$fuelpic]);
             }
-            $res= FuelType::find($id)->update(['name'=>$request->bname,'image'=>'upload/fueltype/'.$fuelpic]);
+            $res= FuelType::find($id)->update(['name'=>$request->name,'image'=>'upload/fueltype/'.$fuelpic]);
 
             if($res)
             {
-                session()->flash('success','Brand Updated Sucessfully');
+                session()->flash('success','Fuel Type Updated Sucessfully');
             }
             else
             {
-                session()->flash('error','Brand not updated ');
+                session()->flash('error','Fuel type not updated ');
             }
         }
         catch(Exception $ex)
