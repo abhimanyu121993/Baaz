@@ -152,7 +152,7 @@ class UserController extends Controller
             {
                 $result = [
                     'data' => $uservehicle,
-                    'message' => 'Company model details found',
+                    'message' => 'User vehicles details found',
                     'status' => 200,
                     'error' => NULL
                 ];
@@ -161,7 +161,7 @@ class UserController extends Controller
             {
                 $result = [
                     'data' => NULL,
-                    'message' => 'Company details not found',
+                    'message' => 'User vehicles not found',
                     'status' => 200,
                     'error' => [
                         'message' => 'Server Error',

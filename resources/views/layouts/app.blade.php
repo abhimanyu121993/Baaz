@@ -8,22 +8,22 @@
    <!-- END: Vendor CSS-->
 
    <!-- BEGIN: Theme CSS-->
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/bootstrap.css')}}">
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/bootstrap-extended.css')}}">
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/colors.css')}}">
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assetscss/components.css')}}">
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/themes/dark-layout.css')}}">
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/themes/bordered-layout.css')}}">
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/themes/semi-dark-layout.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/bootstrap.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/bootstrap-extended.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/colors.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assetscss/components.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/themes/dark-layout.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/themes/bordered-layout.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/themes/semi-dark-layout.css')}}">
 
    <!-- BEGIN: Page CSS-->
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/core/menu/menu-types/vertical-menu.css')}}">
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/plugins/forms/form-validation.css')}}">
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/pages/authentication.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/core/menu/menu-types/vertical-menu.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/plugins/forms/form-validation.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/pages/authentication.css')}}">
    <!-- END: Page CSS-->
 
    <!-- BEGIN: Custom CSS-->
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/css/style.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/css/style.css')}}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -99,20 +99,20 @@
 
 
     <!-- BEGIN: Vendor JS-->
-    <script src="{{asset('BackEnd/assets/vendors/js/vendors.min.js')}}"></script>
+    <script src="{{asset('Backend/assets/vendors/js/vendors.min.js')}}"></script>
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-    <script src="{{asset('BackEnd/assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('Backend/assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
-    <script src="{{asset('BackEnd/assets/js/core/app-menu.js')}}"></script>
-    <script src="{{asset('BackEnd/assets/js/core/app.js')}}"></script>
+    <script src="{{asset('Backend/assets/js/core/app-menu.js')}}"></script>
+    <script src="{{asset('Backend/assets/js/core/app.js')}}"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="{{asset('BackEnd/assets/js/scripts/pages/auth-login.js')}}"></script>
+    <script src="{{asset('Backend/assets/js/scripts/pages/auth-login.js')}}"></script>
     <!-- END: Page JS-->
 
     <script>
