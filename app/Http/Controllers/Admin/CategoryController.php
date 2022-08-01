@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Error;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
-class BrandController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +20,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::get();
-        return view('Backend.brand', compact('brands'));
+        $category = Category::get();
+        return view('Backend.category', compact('category'));
     }
 
     /**
@@ -32,7 +31,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        
+        
     }
 
     /**
@@ -44,26 +44,26 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'bname'=>'required',
+            'cname'=>'required',
             'pic'=>'nullable|image'
         ]);
-        $brandpic='branddummy.jpg';
+        $catpic='branddummy.jpg';
         try
         {
             if($request->hasFile('pic'))
             {
-                $brandpic='brand-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/brands/'),$brandpic);
+                $catpic='category-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/category/'),$catpic);
             }
-            $res= Brand::create(['name'=>$request->bname,'image'=>'upload/brands/'.$brandpic]);
+            $res= Category::create(['name'=>$request->cname,'image'=>'upload/category/'.$catpic]);
 
             if($res)
             {
-                session()->flash('success','Brand Added Sucessfully');
+                session()->flash('success','Category Added Sucessfully');
             }
             else
             {
-                session()->flash('error','Brand not added ');
+                session()->flash('error','Category not added ');
             }
         }
         catch(Exception $ex)
@@ -81,9 +81,9 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+       
     }
 
     /**
@@ -94,12 +94,12 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $brands = Brand::get();
+        $category = Category::get();
         $id=Crypt::decrypt($id);
-        $brandedit=Brand::find($id);
-        if($brandedit)
+        $categoryedit=Category::find($id);
+        if($categoryedit)
         {
-            return view('Backend.brand',compact('brands','brandedit'));
+            return view('Backend.category',compact('category','categoryedit'));
         }
         else
         {
@@ -118,7 +118,7 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'bname'=>'required',
+            'cname'=>'required',
             'pic'=>'nullable|image'
         ]);
         $brandpic='branddummy.jpg';
@@ -126,21 +126,21 @@ class BrandController extends Controller
         {
             if($request->hasFile('pic'))
             {
-                $brandpic='brand-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/brands/'),$brandpic);
-                $oldpic=Brand::find($id)->pluck('image')[0];
+                $catpic='category-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/category/'),$catpic);
+                $oldpic=Category::find($id)->pluck('image')[0];
                     unlink(public_path($oldpic));
-                    Brand::find($id)->update(['image'=>$brandpic]);
+                    Category::find($id)->update(['image'=>$catpic]);
             }
-            $res= Brand::find($id)->update(['name'=>$request->bname,'image'=>'upload/brands/'.$brandpic]);
+            $res= Category::find($id)->update(['name'=>$request->cname,'image'=>'upload/category/'.$catpic]);
 
             if($res)
             {
-                session()->flash('success','Brand Updated Sucessfully');
+                session()->flash('success','Category Updated Sucessfully');
             }
             else
             {
-                session()->flash('error','Brand not updated ');
+                session()->flash('error','Category not updated ');
             }
         }
         catch(Exception $ex)
@@ -162,14 +162,14 @@ class BrandController extends Controller
     {
         $id=Crypt::decrypt($id);
         try{
-                $res=Brand::find($id)->delete();
+                $res=Category::find($id)->delete();
                 if($res)
                 {
-                    session()->flash('success','Brand deleted ducessfully');
+                    session()->flash('success','Category deleted ducessfully');
                 }
                 else
                 {
-                    session()->flash('error','Brand not deleted ');
+                    session()->flash('error','Category not deleted ');
                 }
             }
             catch(Exception $ex)

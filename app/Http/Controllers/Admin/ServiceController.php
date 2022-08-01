@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
-use App\Models\BrandModel;
+use App\Models\Category;
 use App\Models\Error;
+use App\Models\Service;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
-class ModelController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,9 +21,9 @@ class ModelController extends Controller
      */
     public function index()
     {
-        $brands = Brand::get();
-        $models = BrandModel::get();
-        return view('Backend.model', compact('models','brands'));
+        $category = Category::get();
+        $services = Service::get();
+        return view('Backend.service', compact('category','services'));
     }
 
     /**
@@ -32,30 +31,42 @@ class ModelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'bid' => 'required',
-            'mname'=>'required',
+            'cid' => 'required',
+            'sname'=>'required',
+            'sprice'=>'required',
             'pic'=>'nullable|image'
         ]);
-        $modelpic='branddummy.jpg';
+        $servicepic='branddummy.jpg';
         try
         {
             if($request->hasFile('pic'))
             {
-                $modelpic='model-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/models/'),$modelpic);
+                $servicepic='model-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/service/'),$servicepic);
             }
-            $res= BrandModel::create(['bid'=> $request->bid ,'name'=>$request->mname,'image'=>$modelpic]);
+            $res= Service::create(['cid'=> $request->cid ,'name'=>$request->sname,'price'=>$request->sprice,'image'=>'upload/service/'.$servicepic]);
 
             if($res)
             {
-                session()->flash('success','Model Added Sucessfully');
+                session()->flash('success','Service Added Sucessfully');
             }
             else
             {
-                session()->flash('error','Model not added ');
+                session()->flash('error','Service not added ');
             }
         }
         catch(Exception $ex)
@@ -66,7 +77,6 @@ class ModelController extends Controller
         }
             return redirect()->back();
     }
-
 
     /**
      * Display the specified resource.
@@ -87,13 +97,13 @@ class ModelController extends Controller
      */
     public function edit($id)
     {
-        $brands = Brand::get();
-        $models = BrandModel::get();
+        $category = Category::get();
+        $services = Service::get();
         $id=Crypt::decrypt($id);
-        $modeledit=BrandModel::find($id);
-        if($modeledit)
+        $serviceedit=Service::find($id);
+        if($serviceedit)
         {
-            return view('Backend.model',compact('models','modeledit','brands'));
+            return view('Backend.service',compact('category','serviceedit','services'));
         }
         else
         {
@@ -112,27 +122,29 @@ class ModelController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'bid' => 'required',
-            'mname'=>'required',
+            'cid' => 'required',
+            'sname'=>'required',
             'pic'=>'nullable|image'
         ]);
-        $modelpic='branddummy.jpg';
+        $servicepic='branddummy.jpg';
         try
         {
             if($request->hasFile('pic'))
             {
-                $modelpic='model-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/models/'),$modelpic);
+                $servicepic='model-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/service/'),$servicepic);
+                $oldpic=Service::find($id)->pluck('image')[0];
+                    unlink(public_path($oldpic));
             }
-            $res= BrandModel::create(['bid'=> $request->bid ,'name'=>$request->mname,'image'=>$modelpic]);
+            $res= Service::create(['cid'=> $request->cid ,'name'=>$request->sname,'price'=>$request->sprice,'image'=>'upload/service/'.$servicepic]);
 
             if($res)
             {
-                session()->flash('success','Model Updated Sucessfully');
+                session()->flash('success','Service Updated Sucessfully');
             }
             else
             {
-                session()->flash('error','Model not added ');
+                session()->flash('error','Service not added ');
             }
         }
         catch(Exception $ex)
@@ -154,14 +166,14 @@ class ModelController extends Controller
     {
         $id=Crypt::decrypt($id);
         try{
-                $res=BrandModel::find($id)->delete();
+                $res=Service::find($id)->delete();
                 if($res)
                 {
-                    session()->flash('success','Brand deleted ducessfully');
+                    session()->flash('success','Service deleted ducessfully');
                 }
                 else
                 {
-                    session()->flash('error','Brand not deleted ');
+                    session()->flash('error','Service not deleted ');
                 }
             }
             catch(Exception $ex)

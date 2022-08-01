@@ -26,10 +26,10 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <label class="form-label" for="basic-addon-name">Brand Name</label>
+                        <label class="form-label" for="basic-addon-name">Fuel Type Name</label>
 
                         <input type="text" id="basic-addon-name" name='name' class="form-control"
-                            value="{{ isset($fueltypeedit) ? $fueltypeedit->name : '' }}" placeholder="brand Name"
+                            value="{{ isset($fueltypeedit) ? $fueltypeedit->name : '' }}" placeholder="Fuel Type Name"
                             aria-label="Name" aria-describedby="basic-addon-name" required />
                     </div>
                     <div class="col-md-6 mb-1">
@@ -63,7 +63,7 @@
                 <thead>
                     <tr>
                         <th>Sr.No</th>
-                        <th>Name</th>
+                        <th>Fuel Type Name</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>

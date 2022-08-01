@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -29,5 +32,18 @@ class AdminController extends Controller
     public function dashboard()
     {
         return view('Backend.dashboard');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        Session::flush();
+        return redirect('/admin');
+    }
+
+    public function userList()
+    {
+        $users = User::latest()->paginate(10);
+        return view('Backend.userlist', compact('users'));
     }
 }

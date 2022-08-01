@@ -32,7 +32,7 @@
                         @if(isset($modeledit))
                               <option value='{{$modeledit->id}}'>{{$modeledit->brand->name}}</option>
                         @else
-                        <option selected disabled value="">--Select Category--</option>
+                        <option selected disabled value="">--Select Brand--</option>
                         @endif
                        
                             @foreach ($brands as $brand)
@@ -93,7 +93,7 @@
                             <td>{{ $i++ }}</td>
                             <td>{{ $md->brand->name }}</td>
                             <td>{{ $md->name }}</td>
-                            <td><img src="{{ asset('upload/models/' . $md->image) }}" class="me-75 bg-light-danger"
+                            <td><img src="{{ asset($md->image) }}" class="me-75 bg-light-danger"
                                     style="height:60px;width:150px;" /></td>
                             <td>
                                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">

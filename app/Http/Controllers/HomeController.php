@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\BrandModel;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\CompanyModel;
@@ -17,15 +19,15 @@ use Illuminate\Support\Facades\URL;
 
 class HomeController extends Controller
 {
-    public function company()
+    public function brand()
     {
         try
         {
-            $company = Company::get();
-            if ($company)
+            $brand = Brand::get();
+            if ($brand)
             {
                 $result = [
-                    'data' => $company,
+                    'data' => $brand,
                     'message' => 'Company details found',
                     'status' => 200,
                     'error' => NULL
@@ -52,89 +54,19 @@ class HomeController extends Controller
         }
     }
 
-    public function companyModel(Request $req)
+    public function brandModel(Request $req)
     {
         $req->validate([
             'company_id' => 'required'
         ]);
         try
         {
-            $model = Company::find($req->company_id)->models;
+            $model = BrandModel::find($req->company_id)->models;
             if ($model)
             {
                 $result = [
                     'data' => $model,
                     'message' => 'Company model details found',
-                    'status' => 200,
-                    'error' => NULL
-                ];
-            }
-            else
-            {
-                $result = [
-                    'data' => NULL,
-                    'message' => 'Company details not found',
-                    'status' => 200,
-                    'error' => [
-                        'message' => 'Server Error',
-                        'code' => 305,
-                    ]
-                ];
-            }
-            return response()->json($result);
-        }
-        catch (Exception $ex)
-        {
-            $url=URL::current();
-            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
-        }
-    }
-
-    public function slider()
-    {
-        try
-        {
-            $slider = Slider::get();
-            if ($slider)
-            {
-                $result = [
-                    'data' => $slider,
-                    'message' => 'Slider details found',
-                    'status' => 200,
-                    'error' => NULL
-                ];
-            }
-            else
-            {
-                $result = [
-                    'data' => NULL,
-                    'message' => 'Slider details not found',
-                    'status' => 200,
-                    'error' => [
-                        'message' => 'Server Error',
-                        'code' => 305,
-                    ]
-                ];
-            }
-            return response()->json($result);
-        }
-        catch (Exception $ex)
-        {
-            $url=URL::current();
-            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
-        }
-    }
-
-    public function offerBanner()
-    {
-        try
-        {
-            $offerBanner = OfferBanner::get();
-            if ($offerBanner)
-            {
-                $result = [
-                    'data' => $offerBanner,
-                    'message' => 'Company details found',
                     'status' => 200,
                     'error' => NULL
                 ];
@@ -265,5 +197,74 @@ class HomeController extends Controller
         }
     }
 
+    public function slider()
+    {
+        try
+        {
+            $slider = Slider::get();
+            if ($slider)
+            {
+                $result = [
+                    'data' => $slider,
+                    'message' => 'Slider details found',
+                    'status' => 200,
+                    'error' => NULL
+                ];
+            }
+            else
+            {
+                $result = [
+                    'data' => NULL,
+                    'message' => 'Slider details not found',
+                    'status' => 200,
+                    'error' => [
+                        'message' => 'Server Error',
+                        'code' => 305,
+                    ]
+                ];
+            }
+            return response()->json($result);
+        }
+        catch (Exception $ex)
+        {
+            $url=URL::current();
+            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+        }
+    }
+
+    public function offerBanner()
+    {
+        try
+        {
+            $offerBanner = OfferBanner::get();
+            if ($offerBanner)
+            {
+                $result = [
+                    'data' => $offerBanner,
+                    'message' => 'Company details found',
+                    'status' => 200,
+                    'error' => NULL
+                ];
+            }
+            else
+            {
+                $result = [
+                    'data' => NULL,
+                    'message' => 'Company details not found',
+                    'status' => 200,
+                    'error' => [
+                        'message' => 'Server Error',
+                        'code' => 305,
+                    ]
+                ];
+            }
+            return response()->json($result);
+        }
+        catch (Exception $ex)
+        {
+            $url=URL::current();
+            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+        }
+    }
 
 }

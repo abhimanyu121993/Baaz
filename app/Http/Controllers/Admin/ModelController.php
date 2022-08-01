@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\BrandModel;
 use App\Models\Error;
-use App\Models\FuelType;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -11,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
-class FuelTypeController extends Controller
+class ModelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +22,9 @@ class FuelTypeController extends Controller
      */
     public function index()
     {
-        $fueltypes = FuelType::get();
-        return view('Backend.fueltype', compact('fueltypes'));
+        $brands = Brand::get();
+        $models = BrandModel::get();
+        return view('Backend.model', compact('models','brands'));
     }
 
     /**
@@ -29,40 +32,30 @@ class FuelTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
+            'bid' => 'required',
+            'mname'=>'required',
             'pic'=>'nullable|image'
         ]);
-        $fuelpic='branddummy.jpg';
+        $modelpic='branddummy.jpg';
         try
         {
             if($request->hasFile('pic'))
             {
-                $brandpic='brand-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/fueltype/'),$fuelpic);
+                $modelpic='model-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/models/'),$modelpic);
             }
-            $res= FuelType::create(['name'=>$request->name,'image'=>$fuelpic]);
+            $res= BrandModel::create(['bid'=> $request->bid ,'name'=>$request->mname,'image'=>'upload/models/'.$modelpic]);
 
             if($res)
             {
-                session()->flash('success','Brand Added Sucessfully');
+                session()->flash('success','Model Added Sucessfully');
             }
             else
             {
-                session()->flash('error','Brand not added ');
+                session()->flash('error','Model not added ');
             }
         }
         catch(Exception $ex)
@@ -73,6 +66,7 @@ class FuelTypeController extends Controller
         }
             return redirect()->back();
     }
+
 
     /**
      * Display the specified resource.
@@ -93,12 +87,13 @@ class FuelTypeController extends Controller
      */
     public function edit($id)
     {
-        $fueltypes = FuelType::get();
+        $brands = Brand::get();
+        $models = BrandModel::get();
         $id=Crypt::decrypt($id);
-        $fueltypeedit=FuelType::find($id);
-        if($fueltypeedit)
+        $modeledit=BrandModel::find($id);
+        if($modeledit)
         {
-            return view('Backend.fueltype',compact('fueltypeedit','fueltypes'));
+            return view('Backend.model',compact('models','modeledit','brands'));
         }
         else
         {
@@ -117,29 +112,29 @@ class FuelTypeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'bname'=>'required',
+            'bid' => 'required',
+            'mname'=>'required',
             'pic'=>'nullable|image'
         ]);
-        $brandpic='branddummy.jpg';
+        $modelpic='branddummy.jpg';
         try
         {
             if($request->hasFile('pic'))
             {
-                $fuelpic='brand-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/brands/'),$fuelpic);
-                $oldpic=FuelType::find($id)->pluck('image')[0];
-                    unlink(public_path('upload/brands/'.$oldpic));
-                    FuelType::find($id)->update(['image'=>$fuelpic]);
+                $modelpic='model-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/models/'),$modelpic);
+                $oldpic=Brand::find($id)->pluck('image')[0];
+                    unlink(public_path($oldpic));
             }
-            $res= FuelType::find($id)->update(['name'=>$request->bname,'image'=>$fuelpic]);
+            $res= BrandModel::create(['bid'=> $request->bid ,'name'=>$request->mname,'image'=>'upload/models/'.$modelpic]);
 
             if($res)
             {
-                session()->flash('success','Brand Updated Sucessfully');
+                session()->flash('success','Model Updated Sucessfully');
             }
             else
             {
-                session()->flash('error','Brand not updated ');
+                session()->flash('error','Model not added ');
             }
         }
         catch(Exception $ex)
@@ -161,7 +156,7 @@ class FuelTypeController extends Controller
     {
         $id=Crypt::decrypt($id);
         try{
-                $res=FuelType::find($id)->delete();
+                $res=BrandModel::find($id)->delete();
                 if($res)
                 {
                     session()->flash('success','Brand deleted ducessfully');
