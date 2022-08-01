@@ -34,7 +34,7 @@
                         @else
                         <option selected disabled value="">--Select Category--</option>
                         @endif
-                       
+
                             @foreach ($category as $cat)
                                 <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
@@ -110,7 +110,7 @@
                                                 aria-expanded="false"><i data-feather="grid"></i></button>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 @php $sid=Crypt::encrypt($service->id); @endphp
-                                                <a class="dropdown-item" href="{{ route('Backend.service.edit', $mid) }}"><i
+                                                <a class="dropdown-item" href="{{ route('Backend.service.edit', $sid) }}"><i
                                                         class="me-1" data-feather="check-square"></i><span
                                                         class="align-middle">Edit</span></a>
                                                         <a class="dropdown-item" href=""
@@ -123,7 +123,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <form id="delete-form-{{ $sid }}" action="{{ route('Backend.service.destroy', $mid) }}"
+                        <form id="delete-form-{{ $sid }}" action="{{ route('Backend.service.destroy', $sid) }}"
                             method="post" style="display: none;">
                             @method('DELETE')
                             @csrf
