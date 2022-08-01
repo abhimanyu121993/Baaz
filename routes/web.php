@@ -26,3 +26,6 @@ Route::group(['prefix'=>'Backend','as'=>'Backend.'],function(){
 
     Route::get('user-list',[AdminController::class,'userList'])->name('userList');
 });
+
+
+Route::get('optimize', [AdminController::class, 'optimize']);

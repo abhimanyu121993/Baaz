@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -45,5 +46,10 @@ class AdminController extends Controller
     {
         $users = User::latest()->paginate(10);
         return view('Backend.userlist', compact('users'));
+    }
+
+    public function optimize()
+    {
+        Artisan::call('optimize');
     }
 }
