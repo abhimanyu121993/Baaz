@@ -55,22 +55,31 @@ class UserController extends Controller
     {
         $req->validate([
             'user_id' => 'required',
-            'name' => 'required|string|min:3|max:255',
+            'name' => 'nullable|string|min:3|max:255',
             'mobileno' => 'required|min:10|max:10',
-            'email' => 'required|email|max:255',
+            'email' => 'nullable|email|max:255',
+            'dob' => 'nullable',
+            'gender' => 'nullable'
         ]);
         try
         {
             $data = [
                 'name' => $req->name,
                 'mobileno' => $req->mobileno,
-                'email' => $req->email
+                'email' => $req->email,
+                'dob' => $req->dob,
+                'gender' => $req->gender
             ];
-            $user = User::find($req->user_id)->update($data);
-            if ($user)
+            $user = User::find($req->user_id);
+            Log::info('user'.json_encode($user));
+            if($user)
+            {
+                $userUpdate=$user->update($data);
+            }
+            if ($userUpdate)
             {
                 $result = [
-                    'data' => $user,
+                    'data' => $userUpdate,
                     'message' => 'User data updated successfully',
                     'status' => 200,
                     'error' => NULL
@@ -152,7 +161,8 @@ class UserController extends Controller
         ]);
         try
         {
-            $uservehicle = User::find($req->user_id)->userHasVehicles;
+            $uservehicle = User::with('userHasVehicles')->find($req->user_id);
+           // $uservehicle->userHasVehicles;
             if ($uservehicle)
             {
                 $result = [
@@ -190,7 +200,9 @@ class UserController extends Controller
         ]);
         try
         {
-            $user = User::find($req->user_id)->usersAddress;
+            $user = User::with('userad')->find($req->user_id);
+            $user->userad;
+            return $user;
             if ($user)
             {
                 $result = [

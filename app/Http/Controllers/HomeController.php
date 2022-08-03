@@ -198,11 +198,12 @@ class HomeController extends Controller
         }
     }
 
-    public function slider()
+    public function homeSlider()
     {
         try
         {
             $slider = Slider::get();
+            Log::info('slider'.json_encode($slider));
             if ($slider)
             {
                 $result = [

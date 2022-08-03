@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Error;
-use App\Models\Service;
+use App\Models\HomeSlider;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
-class ServiceController extends Controller
+class HomeSliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,9 +20,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $category = Category::get();
-        $services = Service::get();
-        return view('Backend.service', compact('category','services'));
+        $sliders = HomeSlider::get();
+        return view('Backend.homeslider', compact('sliders'));
     }
 
     /**
@@ -45,29 +43,25 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cid' => 'required',
-            'sname'=>'required',
-            'sprice'=>'required',
-            'desc' => 'nullable',
-            'pic'=>'nullable|image'
+            'link'=>'nullable',
+            'pic'=>'image'
         ]);
-        $servicepic='branddummy.jpg';
         try
         {
             if($request->hasFile('pic'))
             {
-                $servicepic='model-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/service/'),$servicepic);
+                $sliderpic='hslider-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/homeslider/'),$sliderpic);
             }
-            $res= Service::create(['cid'=> $request->cid ,'name'=>$request->sname,'price'=>$request->sprice,'desc'=>$request->desc,'image'=>'upload/service/'.$servicepic]);
+            $res= HomeSlider::create(['link'=>$request->link,'image'=>'upload/homeslider/'.$sliderpic]);
 
             if($res)
             {
-                session()->flash('success','Service Added Sucessfully');
+                session()->flash('success','Slider Added Sucessfully');
             }
             else
             {
-                session()->flash('error','Service not added ');
+                session()->flash('error','Slider not added ');
             }
         }
         catch(Exception $ex)
@@ -98,13 +92,12 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::get();
-        $services = Service::get();
+        $sliders = HomeSlider::get();
         $id=Crypt::decrypt($id);
-        $serviceedit=Service::find($id);
-        if($serviceedit)
+        $slideredit=HomeSlider::find($id);
+        if($slideredit)
         {
-            return view('Backend.service',compact('category','serviceedit','services'));
+            return view('Backend.homeslider',compact('sliders','slideredit'));
         }
         else
         {
@@ -123,31 +116,28 @@ class ServiceController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'cid' => 'required',
-            'sname'=>'required',
-            'sprice'=>'required',
-            'desc' => 'nullable',
-            'pic'=>'nullable|image'
+            'link'=>'nullable',
+            'pic'=>'image'
         ]);
-        $servicepic='branddummy.jpg';
         try
         {
             if($request->hasFile('pic'))
             {
-                $servicepic='model-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
-                $request->pic->move(public_path('upload/service/'),$servicepic);
-                $oldpic=Service::find($id)->pluck('image')[0];
+                $sliderpic='hslider-'.time().'-'.rand(0,99).'.'.$request->pic->extension();
+                $request->pic->move(public_path('upload/homeslider/'),$sliderpic);
+                $oldpic=HomeSlider::find($id)->pluck('image')[0];
                     unlink(public_path($oldpic));
+                    HomeSlider::find($id)->update(['image'=>$sliderpic]);
             }
-            $res= Service::create(['cid'=> $request->cid ,'name'=>$request->sname,'price'=>$request->sprice,'desc'=>$request->desc,'image'=>'upload/service/'.$servicepic]);
+            $res= HomeSlider::find($id)->update(['link'=>$request->link,'image'=>'upload/homeslider/'.$sliderpic]);
 
             if($res)
             {
-                session()->flash('success','Service Updated Sucessfully');
+                session()->flash('success','Slider Updated Sucessfully');
             }
             else
             {
-                session()->flash('error','Service not added ');
+                session()->flash('error','Slider not updated ');
             }
         }
         catch(Exception $ex)
@@ -169,14 +159,14 @@ class ServiceController extends Controller
     {
         $id=Crypt::decrypt($id);
         try{
-                $res=Service::find($id)->delete();
+                $res=HomeSlider::find($id)->delete();
                 if($res)
                 {
-                    session()->flash('success','Service deleted ducessfully');
+                    session()->flash('success','Slider deleted ducessfully');
                 }
                 else
                 {
-                    session()->flash('error','Service not deleted ');
+                    session()->flash('error','Slider not deleted ');
                 }
             }
             catch(Exception $ex)

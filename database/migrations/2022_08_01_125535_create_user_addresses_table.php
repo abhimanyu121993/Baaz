@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('pincode')->nullable();
             $table->string('country')->nullable();
             $table->string('status')->default('1');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

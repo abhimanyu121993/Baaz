@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('home_sliders', function (Blueprint $table) {
             $table->id();
-            $table->string('cid');
-            $table->string('name');
-            $table->string('price');
-            $table->longtext('desc');
+            $table->string('link')->nullable();
             $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('home_sliders');
     }
 };

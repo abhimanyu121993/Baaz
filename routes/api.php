@@ -39,5 +39,5 @@ Route::post('fetch-vehicles', [UserController::class, 'userVehicles']);
 Route::post('fetch-user-address', [UserController::class, 'fetchUserAddress']);
 Route::post('update-user-address', [UserController::class, 'updateUserAddress']);
 
-Route::post('fetch-slider', [HomeController::class, 'slider']);
+Route::post('fetch-home-slider', [HomeController::class, 'homeSlider']);
 Route::post('fetch-offer-banner', [HomeController::class, 'offerBanner']);

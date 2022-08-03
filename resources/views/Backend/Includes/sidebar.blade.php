@@ -84,10 +84,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('Backend.userList') }}"><i
-                        data-feather="users"></i><span class="menu-title text-truncate" data-i18n="User List">User
-                        List</span></a>
-            </li>
             <li class="nav-item has-sub" style=""><a class="d-flex align-items-center" href="#"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -114,6 +110,13 @@
                 </ul>
             </li>
 
+            <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('Backend.userList') }}"><i
+                        data-feather="users"></i><span class="menu-title text-truncate" data-i18n="User List">User List</span></a>
+            </li>
+            <li class="nav-item"><a class="d-flex align-items-center"
+                    href="{{ route('Backend.homeslider.index') }}"><i data-feather="sliders"></i><span
+                        class="menu-title text-truncate" data-i18n="User List">Home Slider</span></a>
+            </li>
 
         </ul>
     </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ModelController;
 use App\Http\Controllers\Admin\FuelTypeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\HomeSliderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +24,7 @@ Route::group(['prefix'=>'Backend','as'=>'Backend.'],function(){
     Route::resource('fueltype',FuelTypeController::class);
     Route::resource('category',CategoryController::class);
     Route::resource('service',ServiceController::class);
+    Route::resource('homeslider',HomeSliderController::class);
 
     Route::get('user-list',[AdminController::class,'userList'])->name('userList');
 });
