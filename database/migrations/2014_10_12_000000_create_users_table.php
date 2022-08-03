@@ -16,13 +16,11 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name')->default('BAZZ Customer');
-            $table->string('usertype');
             $table->string('gender')->nullable();
             $table->string('dob')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('mobileno')->nullable();
+            $table->string('mobileno')->unique()->nullable();
             $table->string('otp')->nullable();
             $table->string('gst')->nullable();
             $table->string('address')->nullable();

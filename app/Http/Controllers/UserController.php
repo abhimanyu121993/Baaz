@@ -54,33 +54,20 @@ class UserController extends Controller
     public function updateProfile(Request $req)
     {
         $req->validate([
-            'user_id' => 'required',
-            'name' => 'nullable|string|min:3|max:255',
             'mobileno' => 'required|min:10|max:10',
-            'email' => 'nullable|email|max:255',
-            'dob' => 'nullable',
-            'gender' => 'nullable'
         ]);
         try
         {
-            $data = [
-                'name' => $req->name,
-                'mobileno' => $req->mobileno,
-                'email' => $req->email,
-                'dob' => $req->dob,
-                'gender' => $req->gender
-            ];
-            $user = User::find($req->user_id);
-            Log::info('user'.json_encode($user));
-            if($user)
+            $user = User::where('mobileno',$req->mobileno)->first();
+            if($user == null || $user == NULL)
             {
-                $userUpdate=$user->update($data);
+                $userup = User::create(['mobileno' => $req->mobileno]);
             }
-            if ($userUpdate)
+            if ($user)
             {
                 $result = [
-                    'data' => $userUpdate,
-                    'message' => 'User data updated successfully',
+                    'data' => $user,
+                    'message' => 'User data fetched successfully',
                     'status' => 200,
                     'error' => NULL
                 ];
@@ -88,8 +75,8 @@ class UserController extends Controller
             else
             {
                 $result = [
-                    'data' => NULL,
-                    'message' => 'User data not updated',
+                    'data' => $userup,
+                    'message' => 'User created successfully',
                     'status' => 200,
                     'error' => [
                         'message' => 'Server Error',
