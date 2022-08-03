@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->string('order_id');
-            $table->string('service_type');
-            $table->string('price');
+            $table->string('order_id')->nullable();
+            $table->string('service_type')->nullable();
+            $table->string('price')->nullable();
             $table->string('status')->nullable();
             $table->softDeletes();
             $table->timestamps();

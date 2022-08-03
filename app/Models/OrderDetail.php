@@ -15,4 +15,10 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Order::class, 'order_id');
     }
+
+    public function servicetype()
+    {
+        return $this->belongsTo(Service::class, 'service_type','id');
+    }
+
 }

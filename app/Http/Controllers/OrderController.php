@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\URL;
 
 class OrderController extends Controller
 {
-    public function order(Request $req)
+    public function orderPlaced(Request $req)
     {
-        Log::info('order called'.json_encode($req->all()));
         $req->validate([
             'user_id' => 'required',
             'slot' => 'required'
@@ -23,27 +22,36 @@ class OrderController extends Controller
 
         try 
         {
-            $n = Order::max('order_id')->get();
-            $order_no = (int)$n->order_id + 1;
+            $n = Order::max('order_id');
+            if($n)
+            {
+                $order_no=$n+1;
+            }
+            else
+            {
+                $order_no=1;
+            }
+            $order_no=sprintf('%05d',$order_no);
             $order = Order::create(['user_id' => $req->user_id, 'order_id' => $order_no, 'slot' => $req->slot]);
             $ttamt = 0;
             if ($order) 
             {
-                for ($i = 0; $i < $req->service_type; $i++) 
+                $service_type=json_decode($req->service_type);
+                $price=json_decode( $req->price);
+                for ($i = 0; $i < count($service_type); $i++) 
                 {
                     $oddtl = OrderDetail::create([
                         'order_id' => $order->id,
-                        'service_type' => $req[$i]->service_type,
-                        'price' => $req[$i]->price,
+                        'service_type' =>$service_type[$i],
+                        'price' =>$price[$i],
                     ]);
-                    $ttamt += $req[$i]->price;
+                    $ttamt += $price[$i];
                 }
-
-                OrderDetail::find($oddtl->id)->update(['total_amount' => $ttamt]);
+                $ordeup=Order::where('id',$oddtl->id)->update(['total_amount' => round($ttamt,2)]);
             }
-            if ($order)
+            if ($ordeup)
             {
-                $order->order_details;
+                $order->order_details[0]->servicetype;
                 $result = [
                     'data' => $order,
                     'message' => 'Order placed succesfully',
