@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
@@ -14,8 +15,10 @@ class OrderController extends Controller
 {
     public function order(Request $req)
     {
+        Log::info('order called'.json_encode($req->all()));
         $req->validate([
-            'user_id' => $req->user_id
+            'user_id' => 'required',
+            'slot' => 'required'
         ]);
 
         try 
@@ -36,12 +39,13 @@ class OrderController extends Controller
                     $ttamt += $req[$i]->price;
                 }
 
-                $orderUpdate= OrderDetail::find($oddtl->id)->update(['total_amount' => $ttamt]);
+                OrderDetail::find($oddtl->id)->update(['total_amount' => $ttamt]);
             }
-            if ($orderUpdate)
+            if ($order)
             {
+                $order->order_details;
                 $result = [
-                    'data' => $orderUpdate,
+                    'data' => $order,
                     'message' => 'Order placed succesfully',
                     'status' => 200,
                     'error' => NULL

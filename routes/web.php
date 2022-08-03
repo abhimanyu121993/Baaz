@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\FuelTypeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\HomeSliderController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,4 +31,9 @@ Route::group(['prefix'=>'Backend','as'=>'Backend.'],function(){
 });
 
 
-Route::get('optimize', [AdminController::class, 'optimize']);
+Route::get('/optimize', function(){
+    Artisan::call('optimize');
+});
+Route::get('/optimize-clear', function(){
+    Artisan::call('optimize:clear');
+});

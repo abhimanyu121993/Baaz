@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +42,4 @@ Route::post('update-user-address', [UserController::class, 'updateUserAddress'])
 
 Route::post('fetch-home-slider', [HomeController::class, 'homeSlider']);
 Route::post('fetch-offer-banner', [HomeController::class, 'offerBanner']);
+Route::post('order-history', [OrderController::class, 'order']);
