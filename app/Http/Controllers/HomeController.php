@@ -7,6 +7,7 @@ use App\Models\BrandModel;
 use App\Models\Category;
 use App\Models\Error;
 use App\Models\FuelType;
+use App\Models\HomeSlider;
 use App\Models\OfferBanner;
 use App\Models\Service;
 use App\Models\Slider;
@@ -202,8 +203,7 @@ class HomeController extends Controller
     {
         try
         {
-            $slider = Slider::get();
-            Log::info('slider'.json_encode($slider));
+            $slider = HomeSlider::all();
             if ($slider)
             {
                 $result = [
