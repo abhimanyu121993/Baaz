@@ -150,6 +150,9 @@
                 </tbody>
             </table>
         </div>
+        <div class="card-footer">
+            {!! $services->links('pagination::bootstrap-5') !!}
+        </div>
     </div>
 @endsection
 

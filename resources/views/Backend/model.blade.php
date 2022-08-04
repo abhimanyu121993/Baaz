@@ -34,7 +34,7 @@
                         @else
                         <option selected disabled value="">--Select Brand--</option>
                         @endif
-                       
+
                             @foreach ($brands as $brand)
                                 <option value="{{$brand->id}}">{{$brand->name}}</option>
                             @endforeach
@@ -61,7 +61,7 @@
                     </div>
                     @if (isset($modeledit))
                         <div class="col-sm-6">
-                            <img src="{{ asset('upload/models') }}/{{ $modeledit->image }}" class="bg-light-info" alt="" style="height:100px;width:200px;">
+                            <img src="{{ asset($modeledit->image) }}" class="bg-light-info" alt="" style="height:100px;width:200px;">
                         </div>
                     @endif
                 </div>
@@ -126,6 +126,9 @@
 
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer">
+            {!! $models->links('pagination::bootstrap-5') !!}
         </div>
     </div>
 @endsection

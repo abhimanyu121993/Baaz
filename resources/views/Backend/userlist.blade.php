@@ -35,7 +35,7 @@
                     @foreach ($users as $user)
                         <tr>
                             <td>{{ $i++ }}</td>
-                            <td><img src="" class="me-75 bg-light-danger"
+                            <td><img src="{{asset('Backend/assets/images/dummy-profile.png')}}" class="me-75 bg-light-danger"
                                     style="height:35px;width:35px;" /></td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->dob }}</td>
