@@ -21,7 +21,9 @@
                         <th>Sr.No</th>
                         <th>Pic</th>
                         <th>Name</th>
+                        <th>DOB</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>Action</th>
 
                     </tr>
@@ -36,7 +38,9 @@
                             <td><img src="" class="me-75 bg-light-danger"
                                     style="height:35px;width:35px;" /></td>
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->dob }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->mobileno }}</td>
                             <td>
                                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                                     <div class="mb-1 breadcrumb-right">
@@ -86,5 +90,5 @@
     <script src="{{ asset('Backend/assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('Backend/assets/js/scripts/tables/table-datatables-advanced.js') }}"></script>
 
-   
+
 @endsection
