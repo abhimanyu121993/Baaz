@@ -43,7 +43,7 @@
                                 <i class="fa fa-users fa-2x text-primary" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25"> {{ $user}} </h2>
+                        <h2 class="text-bold-700 mt-1 mb-25">  </h2>
                         <p class="mb-0">Users</p>
                     </div>
                     <div class="card-content">
