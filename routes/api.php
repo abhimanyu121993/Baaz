@@ -43,3 +43,4 @@ Route::post('update-user-address', [UserController::class, 'updateUserAddress'])
 Route::post('fetch-home-slider', [HomeController::class, 'homeSlider']);
 Route::post('fetch-offer-banner', [HomeController::class, 'offerBanner']);
 Route::post('order-placed', [OrderController::class, 'orderPlaced']);
+Route::post('order-history', [OrderController::class, 'orderHistory']);

@@ -55,7 +55,7 @@
             <li class="nav-item has-sub" style=""><a class="d-flex align-items-center" href="#"><svg
                         xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-folder-minus">
+                        stroke-linejoin="round" data-feather="slack" class="feather feather-folder-minus">
                         <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
                         <line x1="9" y1="14" x2="15" y2="14"></line>
                     </svg><span class="menu-title text-truncate" data-i18n="Invoice">Car</span></a>
@@ -116,6 +116,10 @@
             <li class="nav-item"><a class="d-flex align-items-center"
                     href="{{ route('Backend.homeslider.index') }}"><i data-feather="sliders"></i><span
                         class="menu-title text-truncate" data-i18n="User List">Home Slider</span></a>
+            </li>
+            <li class="nav-item"><a class="d-flex align-items-center"
+                href="{{ route('Backend.orderhistory.index') }}"><i data-feather="file-text"></i><span
+                    class="menu-title text-truncate" data-i18n="User List">Order History</span></a>
             </li>
 
         </ul>

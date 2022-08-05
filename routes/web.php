@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\FuelTypeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\HomeSliderController;
+use App\Http\Controllers\Admin\OrderHistoryController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
@@ -26,6 +27,7 @@ Route::group(['prefix'=>'Backend','as'=>'Backend.'],function(){
     Route::resource('category',CategoryController::class);
     Route::resource('service',ServiceController::class);
     Route::resource('homeslider',HomeSliderController::class);
+    Route::resource('orderhistory',OrderHistoryController::class);
 
     Route::get('user-list',[AdminController::class,'userList'])->name('userList');
 });

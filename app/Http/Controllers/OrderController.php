@@ -20,7 +20,7 @@ class OrderController extends Controller
             'slot' => 'required'
         ]);
 
-        try 
+        try
         {
             $n = Order::max('order_id');
             if($n)
@@ -34,11 +34,11 @@ class OrderController extends Controller
             $order_no=sprintf('%05d',$order_no);
             $order = Order::create(['user_id' => $req->user_id, 'order_id' => $order_no, 'slot' => $req->slot]);
             $ttamt = 0;
-            if ($order) 
+            if ($order)
             {
                 $service_type=json_decode($req->service_type);
                 $price=json_decode( $req->price);
-                for ($i = 0; $i < count($service_type); $i++) 
+                for ($i = 0; $i < count($service_type); $i++)
                 {
                     $oddtl = OrderDetail::create([
                         'order_id' => $order->id,
@@ -71,13 +71,48 @@ class OrderController extends Controller
                     ]
                 ];
             }
-        } 
-        catch (Exception $ex) 
+        }
+        catch (Exception $ex)
         {
             $url = URL::current();
             Error::create(['url' => $url, 'message' => $ex->getMessage()]);
             Session::flash('error', 'Server Error ');
         }
         return response()->json($result);
+    }
+
+    public function orderHistory()
+    {
+        try
+        {
+            $orders = Order::get();
+            if ($orders)
+            {
+                $result = [
+                    'data' => $orders,
+                    'message' => 'Order history details',
+                    'status' => 200,
+                    'error' => NULL
+                ];
+            }
+            else
+            {
+                $result = [
+                    'data' => NULL,
+                    'message' => 'Order history not found',
+                    'status' => 200,
+                    'error' => [
+                        'message' => 'Server Error',
+                        'code' => 305,
+                    ]
+                ];
+            }
+            return response()->json($result);
+        }
+        catch (Exception $ex)
+        {
+            $url=URL::current();
+            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+        }
     }
 }
