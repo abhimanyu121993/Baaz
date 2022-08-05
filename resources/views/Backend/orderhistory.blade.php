@@ -92,8 +92,8 @@
                                                 @php $oid=Crypt::encrypt($order->order_id); @endphp
                                                 <td><a href="{{ route('Backend.orderhistory.show', $oid) }}">BAAZ-{{ $order->order_id }}</a></td>
                                                 <td>{{ $order->user->name ?? 'BAAZ Customer' }}</td>
-                                                <td>{{ $order->slot ?? '' }}</td>
-                                                <td>{{ $order->user->mobileno ?? '' }}</td>
+                                                <td>{{ $order->slot ?? ''}}</td>
+                                                <td>{{ $order->user->mobileno ?? ''}}</td>
                                                 <td>{{ $order->total_amount }}</td>
                                                 <td>{{ $order->order_status }}</td>
                                                 <td>{{ $order->payment_mode }}</td>
