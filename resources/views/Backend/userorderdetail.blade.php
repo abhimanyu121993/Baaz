@@ -26,22 +26,24 @@
                 </thead>
                 <tbody>
                     @if($orderDetails)
-                            <tr>
-                                <td><img src="{{asset($orderDetails->image)}}" class="me-75 bg-light-danger"
-                                    style="height:35px;width:35px;" /></td>
-                                <td>{{ $orderDetails->name ?? '' }}</td>
-                                <td>{{ $orderDetails->price ?? '' }}</td>
-                            </tr>
+                        @foreach ($orderDetails->order_details as $order )
+                        <tr>
+                            <td><img src="{{asset($order->servicetype->image ?? '')}}" class="me-75 bg-light-danger"
+                                style="height:35px;width:35px;" /></td>
+                            <td>{{ $order->servicetype->name ?? '' }}</td>
+                            <td>{{ $order->servicetype->price ?? '' }}</td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="100%" class="text-center">Service not available for this order</td>
+                        </tr>
                     @endif
                 </tbody>
             </table>
 
         </div>
     </div>
-
-
-
-
 
 @endsection
 

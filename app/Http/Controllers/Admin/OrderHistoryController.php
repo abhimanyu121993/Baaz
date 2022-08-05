@@ -57,8 +57,7 @@ class OrderHistoryController extends Controller
         try
         {
             $id=Crypt::decrypt($id);
-            $orderDetails = Order::where('id', $id)->first()->order_details[0]->servicetype;
-            Log::info('orderdetails'.json_encode($orderDetails));
+            $orderDetails = Order::where('id', $id)->first();
             return view('Backend.userorderdetail', compact('orderDetails'));
         }
         catch (Exception $ex)
