@@ -39,7 +39,7 @@ class AdminController extends Controller
         $brand = Brand::count();
         $model = BrandModel::count();
         $order = Order::count();
-        return view('Backend.dashboard', compact('user', 'brand', 'model', 'order'));
+        return view('Backend.dashboard');
     }
 
     public function logout()
