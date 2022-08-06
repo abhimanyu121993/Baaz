@@ -1,7 +1,7 @@
 <nav
     class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
     <div class="navbar-container d-flex content">
-        <div class="bookmark-wrapper d-flex align-items-center">
+        {{-- <div class="bookmark-wrapper d-flex align-items-center">
             <ul class="nav navbar-nav d-xl-none">
                 <li class="nav-item"><a class="nav-link menu-toggle" href="#"><i class="ficon"
                             data-feather="menu"></i></a></li>
@@ -30,7 +30,7 @@
                     </div>
                 </li>
             </ul>
-        </div>
+        </div> --}}
         <ul class="nav navbar-nav align-items-center ms-auto">
             <li class="nav-item dropdown dropdown-language"><a class="nav-link dropdown-toggle" id="dropdown-flag"
                     href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
