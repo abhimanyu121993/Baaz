@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\HomeSliderController;
 use App\Http\Controllers\Admin\OrderHistoryController;
+use App\Http\Middleware\AuthLogin;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
@@ -17,7 +18,7 @@ Route::get('/', function () {
 Route::get('admin',[AdminController::class,'admin'])->name('admin');
 Route::post('adminlogin',[AdminController::class,'login'])->name('login');
 
-Route::group(['prefix'=>'Backend','as'=>'Backend.', 'middleware' => ['AuthLogin'] ],function(){
+Route::group(['prefix'=>'Backend','as'=>'Backend.'],function(){
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::post('logout',[AdminController::class,'logout'])->name('logout');
 

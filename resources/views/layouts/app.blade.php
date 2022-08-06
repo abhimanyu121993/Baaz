@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
    <!-- BEGIN: Vendor CSS-->
-   <link rel="stylesheet" type="text/css" href="{{asset('BackEnd/assets/vendors/css/vendors.min.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{asset('Backend/assets/vendors/css/vendors.min.css')}}">
    <!-- END: Vendor CSS-->
 
    <!-- BEGIN: Theme CSS-->
@@ -27,7 +27,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Herbo Vedik') }}</title>
+    <title>{{ config('app.name', 'Baaz') }}</title>
 
 
 
