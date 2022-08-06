@@ -17,7 +17,7 @@ Route::get('/', function () {
 Route::get('admin',[AdminController::class,'admin'])->name('admin');
 Route::post('adminlogin',[AdminController::class,'login'])->name('login');
 
-Route::group(['prefix'=>'Backend','as'=>'Backend.'],function(){
+Route::group(['prefix'=>'Backend','as'=>'Backend.', 'middleware' => ['AuthLogin'] ],function(){
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::post('logout',[AdminController::class,'logout'])->name('logout');
 
