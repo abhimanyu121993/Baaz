@@ -43,7 +43,7 @@
                                 <i class="fa fa-users fa-2x text-primary" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25">0  </h2>
+                        <h2 class="text-bold-700 mt-1 mb-25">{{ $user }}  </h2>
                         <p class="mb-0">Users</p>
                     </div>
                     <div class="card-content">
@@ -59,7 +59,7 @@
                                 <i class="fa fa-snowflake-o fa-2x text-info" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25"> 0 </h2>
+                        <h2 class="text-bold-700 mt-1 mb-25"> {{ $brand }} </h2>
                         <p class="mb-0">Brands</p>
                     </div>
                     <div class="card-content">
@@ -75,7 +75,7 @@
                                 <i class="fa fa-modx fa-2x text-success" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25"> 0 </h2>
+                        <h2 class="text-bold-700 mt-1 mb-25"> {{ $model }} </h2>
                         <p class="mb-0">Models</p>
                     </div>
                     <div class="card-content">
@@ -91,7 +91,7 @@
                                 <i class="fa fa-pie-chart fa-2x text-danger" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <h2 class="text-bold-700 mt-1 mb-25"> 0</h2>
+                        <h2 class="text-bold-700 mt-1 mb-25"> {{ $order }}</h2>
                         <p class="mb-0">Orders Received</p>
                     </div>
                     <div class="card-content">

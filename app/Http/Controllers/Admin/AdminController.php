@@ -26,10 +26,10 @@ class AdminController extends Controller
         if(Auth::guard('adminauth')
             ->attempt(['email' => $req->email, 'password' => $req->password], $req->remember_me))
         {
-                return view('Backend.dashboard');
+                return redirect('/Backend/dashboard');
         }
         else {
-            return view('Backend.login');
+            return redirect('/admin');
         }
     }
 
@@ -39,7 +39,7 @@ class AdminController extends Controller
         $brand = Brand::count();
         $model = BrandModel::count();
         $order = Order::count();
-        return view('Backend.dashboard');
+        return view('Backend.dashboard', compact('user', 'brand', 'model', 'order'));
     }
 
     public function logout()
