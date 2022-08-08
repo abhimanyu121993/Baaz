@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Error;
+use App\Models\TestUser;
 use App\Models\User;
 use App\Models\UserAddress;
 use App\Models\UserVehicleMap;
@@ -256,6 +257,46 @@ class UserController extends Controller
                 $result = [
                     'data' => NULL,
                     'message' => 'User address not updated',
+                    'status' => 200,
+                    'error' => [
+                        'message' => 'Server Error',
+                        'code' => 305,
+                    ]
+                ];
+            }
+            return response()->json($result);
+        }
+        catch (Exception $ex)
+        {
+            $url=URL::current();
+            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+        }
+    }
+
+    public function registerTestUser(Request $req)
+    {
+        try
+        {
+            $testuser = TestUser::create([
+                'name' => $req->name,
+                'phone' => $req->phone,
+                'email' => $req->email,
+                'password' => $req->password
+            ]);
+            if ($testuser)
+            {
+                $result = [
+                    'data' => $testuser,
+                    'message' => 'Data inserted successfully',
+                    'status' => 200,
+                    'error' => NULL
+                ];
+            }
+            else
+            {
+                $result = [
+                    'data' => NULL,
+                    'message' => 'Data inserted successfully',
                     'status' => 200,
                     'error' => [
                         'message' => 'Server Error',

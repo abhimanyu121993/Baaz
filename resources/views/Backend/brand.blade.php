@@ -12,7 +12,7 @@
                 @if (!isset($brandedit))
                     Add New Brand
                 @else
-                    Edit Brand
+                    Update Brand
                 @endif
             </h3>
         </div>
@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <button type="submit"
-                            class="btn btn-primary waves-effect waves-float waves-light">{{ isset($brandedit) ? 'Edit' : 'Add' }}</button>
+                            class="btn btn-primary waves-effect waves-float waves-light">{{ isset($brandedit) ? 'Update' : 'Add' }}</button>
                     </div>
                     @if (isset($brandedit))
                         <div class="col-sm-6">
@@ -70,10 +70,9 @@
 
                 </thead>
                 <tbody>
-                    @php $i=1;@endphp
                     @foreach ($brands as $bd)
                         <tr>
-                            <td>{{ $i++ }}</td>
+                            <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $bd->name }}</td>
                             <td><img src="{{ asset( $bd->image) }}" class="me-75 bg-light-danger"
                                     style="height:60px;width:150px;" /></td>
@@ -110,6 +109,7 @@
             </table>
         </div>
     </div>
+
 @endsection
 
 
