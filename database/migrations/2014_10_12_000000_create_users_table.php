@@ -15,17 +15,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->default('BAZZ Customer');
-            $table->string('gender')->nullable();
-            $table->string('dob')->nullable();
-            $table->string('email')->unique()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('mobileno')->unique()->nullable();
-            $table->string('otp')->nullable();
-            $table->string('gst')->nullable();
-            $table->string('address')->nullable();
+            $table->string('empid')->nullable();
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
+            $table->string('roleid')->nullable();
             $table->string('pic')->nullable();
-            $table->rememberToken();
+            $table->string('aadharid')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

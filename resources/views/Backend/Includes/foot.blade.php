@@ -7,6 +7,12 @@
 <script src="{{asset('Backend/assets/vendors/js/extensions/toastr.min.js')}}"></script>
 <!-- END: Page Vendor JS-->
 
+   <!-- BEGIN: Theme JS-->
+   <script src="{{asset('Backend/assets/js/core/app-menu.js')}}"></script>
+   <script src="{{asset('Backend/assets/js/core/app.js')}}"></script>
+   <script src="{{asset('Backend/assets/js/scripts/components.js')}}"></script>
+   <!-- END: Theme JS-->
+
 <!-- BEGIN: Theme JS-->
 <script src="{{asset('Backend/assets/js/core/app-menu.min.js')}}"></script>
 <script src="{{asset('Backend/assets/js/core/app.min.js')}}"></script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Error;
 use App\Models\User;
 use Exception;
@@ -18,7 +19,7 @@ class AuthController extends Controller
         ]);
         if ($req->authentication === 'TRUE')
         {
-            $phone = User::find($req->mobileno);
+            $phone = Customer::find($req->mobileno);
             try
             {
                 $data = $req->mobileno == $phone;

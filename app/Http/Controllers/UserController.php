@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Error;
 use App\Models\TestUser;
 use App\Models\User;
@@ -21,7 +22,7 @@ class UserController extends Controller
         ]);
         try
         {
-            $user = User::find($req->user_id);
+            $user = Customer::find($req->user_id);
             if ($user)
             {
                 $result = [
@@ -59,10 +60,10 @@ class UserController extends Controller
         ]);
         try
         {
-            $user = User::where('mobileno',$req->mobileno)->first();
+            $user = Customer::where('mobileno',$req->mobileno)->first();
             if($user == null || $user == NULL)
             {
-                $userup = User::create(['mobileno' => $req->mobileno]);
+                $userup = Customer::create(['mobileno' => $req->mobileno]);
             }
             if ($user)
             {
@@ -149,7 +150,7 @@ class UserController extends Controller
         ]);
         try
         {
-            $uservehicle = User::with('userHasVehicles')->find($req->user_id);
+            $uservehicle = Customer::with('userHasVehicles')->find($req->user_id);
            // $uservehicle->userHasVehicles;
             if ($uservehicle)
             {
@@ -188,7 +189,7 @@ class UserController extends Controller
         ]);
         try
         {
-            $user = User::with('userad')->find($req->user_id);
+            $user = Customer::with('userad')->find($req->user_id);
             $user->userad;
             return $user;
             if ($user)
@@ -242,7 +243,7 @@ class UserController extends Controller
                 'pincode' => $req->pincode,
                 'status' => $req->status
             ];
-            $user = User::find($req->user_id)->update($data);
+            $user = Customer::find($req->user_id)->update($data);
             if ($user)
             {
                 $result = [
@@ -273,43 +274,43 @@ class UserController extends Controller
         }
     }
 
-    public function registerTestUser(Request $req)
-    {
-        try
-        {
-            $testuser = TestUser::create([
-                'name' => $req->name,
-                'phone' => $req->phone,
-                'email' => $req->email,
-                'password' => $req->password
-            ]);
-            if ($testuser)
-            {
-                $result = [
-                    'data' => $testuser,
-                    'message' => 'Data inserted successfully',
-                    'status' => 200,
-                    'error' => NULL
-                ];
-            }
-            else
-            {
-                $result = [
-                    'data' => NULL,
-                    'message' => 'Data inserted successfully',
-                    'status' => 200,
-                    'error' => [
-                        'message' => 'Server Error',
-                        'code' => 305,
-                    ]
-                ];
-            }
-            return response()->json($result);
-        }
-        catch (Exception $ex)
-        {
-            $url=URL::current();
-            Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
-        }
-    }
+    // public function registerTestUser(Request $req)
+    // {
+    //     try
+    //     {
+    //         $testuser = TestUser::create([
+    //             'name' => $req->name,
+    //             'phone' => $req->phone,
+    //             'email' => $req->email,
+    //             'password' => $req->password
+    //         ]);
+    //         if ($testuser)
+    //         {
+    //             $result = [
+    //                 'data' => $testuser,
+    //                 'message' => 'Data inserted successfully',
+    //                 'status' => 200,
+    //                 'error' => NULL
+    //             ];
+    //         }
+    //         else
+    //         {
+    //             $result = [
+    //                 'data' => NULL,
+    //                 'message' => 'Data inserted successfully',
+    //                 'status' => 200,
+    //                 'error' => [
+    //                     'message' => 'Server Error',
+    //                     'code' => 305,
+    //                 ]
+    //             ];
+    //         }
+    //         return response()->json($result);
+    //     }
+    //     catch (Exception $ex)
+    //     {
+    //         $url=URL::current();
+    //         Error::create(['url'=>$url,'message'=>$ex->getMessage()]);
+    //     }
+    // }
 }

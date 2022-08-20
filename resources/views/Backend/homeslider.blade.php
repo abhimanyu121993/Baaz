@@ -26,7 +26,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <label class="form-label" for="basic-addon-name">Brand Name</label>
+                        <label class="form-label" for="basic-addon-name">Slider Link</label>
 
                         <input type="text" id="basic-addon-name" name='link' class="form-control"
                             value="{{ isset($slideredit) ? $slideredit->link : '' }}" placeholder="Enter Link"
@@ -63,8 +63,8 @@
                 <thead>
                     <tr>
                         <th>Sr.No</th>
-                        <th>Link</th>
                         <th>Image</th>
+                        <th>Link</th>
                         <th>Action</th>
                     </tr>
 
@@ -74,9 +74,11 @@
                     @foreach ($sliders as $slider)
                         <tr>
                             <td>{{ $i++ }}</td>
+                            <td>
+                                <img src="{{ asset( $slider->image) }}" class="me-75 bg-light-danger"
+                                    style="height:60px;width:150px;" />
+                            </td>
                             <td>{{ $slider->link }}</td>
-                            <td><img src="{{ asset( $slider->image) }}" class="me-75 bg-light-danger"
-                                    style="height:60px;width:150px;" /></td>
                             <td>
                                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                                     <div class="mb-1 breadcrumb-right">

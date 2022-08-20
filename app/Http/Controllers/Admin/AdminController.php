@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\BrandModel;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,8 +23,7 @@ class AdminController extends Controller
 
     public function login(Request $req)
     {
-        if(Auth::guard('adminauth')
-            ->attempt(['email' => $req->email, 'password' => $req->password], $req->remember_me))
+        if(Auth::attempt(['email' => $req->email, 'password' => $req->password], $req->remember_me))
         {
                 return redirect('/Backend/dashboard');
         }
@@ -45,13 +45,13 @@ class AdminController extends Controller
     {
         Auth::logout();
         Session::flush();
-        return redirect('/admin');
+        return redirect('/');
     }
 
     public function userList()
     {
-        $users = User::latest()->paginate(10);
-        return view('Backend.userlist', compact('users'));
+        $customers = Customer::latest()->paginate(25);
+        return view('Backend.customerlist', compact('customers'));
     }
 
     public function optimize()

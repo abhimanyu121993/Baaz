@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Error;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\User;
+use App\Models\Workshop;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -100,5 +102,22 @@ class OrderHistoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pendingOrders()
+    {
+        // $users = User::role('RM')->get();
+        $workshops = Workshop::all();
+        $pendingorders = Order::orWhere('order_status','pending')
+            ->orWhere('order_status', NULL)
+            ->paginate(20);
+        return view('Backend.pending_orders', compact('pendingorders', 'workshops'));
+    }
+
+    public function confirmedOrders()
+    {
+        $confirmedorders = Order::Where('order_status','confirmed')
+            ->paginate(20);
+        return view('Backend.confirmed_orders', compact('confirmedorders'));
     }
 }

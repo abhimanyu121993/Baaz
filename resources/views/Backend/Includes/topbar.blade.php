@@ -43,7 +43,7 @@
                         data-feather="search"></i></a>
                 <div class="search-input">
                     <div class="search-input-icon"><i data-feather="search"></i></div>
-                    <input class="form-control input" type="text" placeholder="Search Herbo Vedik " tabindex="-1"
+                    <input class="form-control input" type="text" placeholder="Search Baaz services " tabindex="-1"
                         data-search="search">
                     <div class="search-input-close"><i data-feather="x"></i></div>
                     <ul class="search-list search-list-main"></ul>
@@ -195,11 +195,11 @@
                     id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <div class="user-nav d-sm-flex d-none">
-                        <span class="user-name fw-bolder">BAAZ</span>
-                        <span class="user-status">Admin</span>
+                        <span class="user-name fw-bolder">{{ Auth::user()->name ?? 'Baaz' }}</span>
+                        <span class="user-status">{{ Auth::user()->roles[0]->name ?? 'User' }}</span>
                     </div>
                     <span class="avatar">
-                        <img class="round" alt="avatar" height="40" width="40" src="{{ asset('upload/bazz_logo.png') }}">
+                        <img class="round" alt="avatar" height="40" width="40" src="{{ asset(Auth::user()->pic) }}">
                         <span class="avatar-status-online"></span>
                     </span>
                 </a>
